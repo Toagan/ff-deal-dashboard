@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'self'; object-src 'none'">
+  <title>Deal dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div>
+      <p class="wordmark" aria-label="FinancialFilings">Financial<span>Filings</span></p>
+      <p class="eyebrow">Deal dashboard · totals only, no deal names</p>
+    </div>
+    <div class="controls">
+      <label class="eyebrow" for="view-select">Showing</label>
+      <select id="view-select"></select>
+      <p class="synced" id="synced" role="status">Loading…</p>
+    </div>
+  </header>
+
+  <main id="dashboard" hidden>
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-main">
+        <h1 class="eyebrow" id="hero-heading">Open pipeline</h1>
+        <p class="hero-number" id="kpi-open"></p>
+        <p class="hero-note" id="kpi-open-note"></p>
+      </div>
+      <dl class="kpi-strip" id="kpi-strip"></dl>
+    </section>
+
+    <section class="panel span-7" aria-labelledby="funnel-heading">
+      <h2 id="funnel-heading">Pipeline by stage</h2>
+      <p class="panel-note">Face value per open stage. Hover a bar for count, weighted value and time in stage.</p>
+      <div id="funnel" class="hbars"></div>
+      <p class="watchlist" id="watchlist"></p>
+    </section>
+
+    <section class="panel span-5 panel-ink" aria-labelledby="hygiene-heading">
+      <h2 id="hygiene-heading">Pipeline hygiene</h2>
+      <p class="panel-note">Open deals past Lead, counted by what is missing.</p>
+      <ul id="hygiene" class="hygiene"></ul>
+    </section>
+
+    <section class="panel span-6" aria-labelledby="forecast-heading">
+      <h2 id="forecast-heading">Expected closes, next six months</h2>
+      <p class="panel-note">Open deals by close date.</p>
+      <ul class="legend" aria-label="Series">
+        <li><i class="swatch swatch-context"></i>Face value</li>
+        <li><i class="swatch swatch-brand"></i>Weighted by stage probability</li>
+      </ul>
+      <div id="forecast" class="columns"></div>
+    </section>
+
+    <section class="panel span-6" aria-labelledby="won-heading">
+      <h2 id="won-heading">Closed won per month</h2>
+      <p class="panel-note">Sales Pipeline, last twelve months.</p>
+      <div id="won" class="columns"></div>
+    </section>
+
+    <section class="panel span-6" aria-labelledby="created-heading">
+      <h2 id="created-heading">New deals created per month</h2>
+      <p class="panel-note">Sales Pipeline, last twelve months.</p>
+      <div id="created" class="columns"></div>
+    </section>
+
+    <section class="panel span-6" aria-labelledby="cs-heading">
+      <h2 id="cs-heading">Customer Success: renewals and upsell</h2>
+      <p class="panel-note">Existing customers, by stage.</p>
+      <div class="table-scroll"><table id="cs-table"></table></div>
+    </section>
+
+    <section class="panel span-6" aria-labelledby="owner-heading">
+      <h2 id="owner-heading">By owner</h2>
+      <p class="panel-note">Always all deals, whatever the view above.</p>
+      <div class="table-scroll"><table id="owner-table"></table></div>
+    </section>
+
+    <section class="panel span-6" aria-labelledby="segment-heading">
+      <h2 id="segment-heading">By segment</h2>
+      <p class="panel-note">Always all deals, whatever the view above.</p>
+      <div class="table-scroll"><table id="segment-table"></table></div>
+    </section>
+  </main>
+
+  <p class="error" id="error" role="alert" hidden></p>
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+
+  <footer>
+    <p>Synced from HubSpot every hour. Amounts in EUR. Open pipeline leaves out Lead and Future Opportunity. Win rate counts only deals with an amount.</p>
+    <p class="mono">financialfilings.com</p>
+  </footer>
+</body>
+</html>
